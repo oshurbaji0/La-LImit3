@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دراسة تسويقية وتحليلية لمجمع تبيان التعليمي</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for menu icon and scroll-to-top icon (Updated to a more recent stable version) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Define custom CSS variables for colors based on the logo */
+        :root {
+            --color-primary-dark-blue: #003366; /* Deep blue for headings, strong accents */
+            --color-primary-blue: #0056b3;     /* Main blue for active states, gradients */
+            --color-secondary-blue-light: #e6f0ff; /* Very light blue for backgrounds/hovers */
+            --color-secondary-blue-medium: #bbdeff; /* Medium blue for borders/table headers */
+            --color-accent-yellow: #FFD700;    /* Bright yellow for highlights */
+            --color-text-dark: #212121;         /* Dark gray for general text */
+            --color-background-light: #f8f8f8; /* Off-white for main content background */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-background-light);
+            color: var(--color-text-dark);
+            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+        /* Styles for content sections within the study container */
+        .study-section-content {
+            display: none; /* Hidden by default */
+            animation: fadeInScale 0.8s ease-out forwards; /* Enhanced fade-in with slight scale */
+        }
+        .study-section-content.active {
+            display: block !important; /* Force display to block to ensure visibility */
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Header specific styles */
+        .header-bg {
+            background: linear-gradient(135deg, var(--color-primary-blue), var(--color-primary-dark-blue));
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Navigation Button Styles */
+        .nav-button {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* More complex cubic-bezier for smoother feel */
+            border-radius: 0.75rem; /* Slightly more rounded */
+            transform: translateZ(0); /* Force hardware acceleration */
+            position: relative;
+            overflow: hidden;
+            background-color: var(--color-secondary-blue-light);
+            color: var(--color-primary-dark-blue);
+        }
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 40%, var(--color-accent-yellow) 50%, transparent 60%);
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            opacity: 0.2;
+        }
+        .nav-button:hover:not(.active)::before {
+            transform: translateX(100%);
+        }
+        .nav-button.active {
+            background-color: var(--color-primary-blue);
+            color: white;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow for active */
+            transform: translateY(-3px); /* More pronounced lift */
+        }
+        .nav-button:hover:not(.active) {
+            background-color: var(--color-secondary-blue-medium);
+            color: var(--color-primary-dark-blue);
+            transform: translateY(-2px); /* Subtle lift on hover */
+        }
+
+        /* Headings and Text Colors */
+        h1, h2 {
+            color: var(--color-primary-dark-blue);
+            font-weight: 700;
+        }
+        /* Enhanced h3 (subheading) styling */
+        h3 {
+            color: var(--color-primary-blue); /* Primary blue for subheadings */
+            font-weight: 600;
+            font-size: 1.5rem; /* Slightly larger for emphasis */
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px dashed var(--color-secondary-blue-medium); /* Dashed border for unique look */
+            display: inline-block; /* To make border only under text */
+            padding-left: 0.5rem; /* Space for RTL */
+            padding-right: 0.5rem;
+            margin-top: 2rem; /* Space above subheadings */
+        }
+
+
+        /* Table Styles */
+        table {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Stronger shadow for tables */
+            border-radius: 1rem; /* More rounded corners */
+        }
+        th, td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--color-secondary-blue-medium);
+            text-align: right; /* Ensure RTL alignment */
+        }
+        th {
+            background-color: var(--color-secondary-blue-light);
+            color: var(--color-primary-dark-blue);
+        }
+        tr:hover {
+            background-color: var(--color-secondary-blue-light);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-background-light);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-primary-blue);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-primary-dark-blue);
+        }
+
+        /* Enhanced List Item Motion (Card-like appearance) */
+        ul.list-disc li, ul.list-circle li, ul.list-square li {
+            list-style: none; /* Remove default bullets */
+            background-color: white;
+            padding: 1.25rem;
+            margin-bottom: 0.75rem; /* Space between cards */
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
+            border-left: 5px solid transparent; /* Initial border */
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        ul.list-disc li:hover, ul.list-circle li:hover, ul.list-square li:hover {
+            transform: translateY(-5px) scale(1.01); /* Lift and slightly scale on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+            border-left-color: var(--color-primary-blue); /* Highlight on hover */
+        }
+        ul.list-disc li::before, ul.list-circle li::before, ul.list-square li::before {
+            content: '•'; /* Custom bullet point */
+            color: var(--color-accent-yellow); /* Yellow bullet */
+            font-size: 1.5em;
+            position: absolute;
+            right: 1.25rem; /* Adjust position for RTL */
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 0.3s ease-in-out;
+            opacity: 0.7;
+        }
+        ul.list-disc li:hover::before, ul.list-circle li:hover::before, ul.list-square li:hover::before {
+            color: var(--color-primary-dark-blue); /* Change bullet color on hover */
+            transform: translateY(-50%) scale(1.2); /* Pop effect */
+            opacity: 1;
+        }
+        /* Adjust text padding for custom bullet */
+        ul.list-disc li p, ul.list-circle li p, ul.list-square li p {
+            padding-right: 2rem; /* Make space for the custom bullet */
+        }
+
+        /* Specific styling for nested square lists (for "مهارات أخرى عالية الطلب") */
+        ul.list-square {
+            list-style: square; /* Ensure square bullets are visible */
+            padding-right: 1.5rem; /* Add padding for bullets */
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        ul.list-square li {
+            background-color: transparent; /* Remove card background for nested items */
+            box-shadow: none; /* Remove shadow for nested items */
+            border-left: none; /* Remove border for nested items */
+            padding: 0.25rem 0; /* Adjust padding */
+            margin-bottom: 0.25rem;
+            font-size: 1rem; /* Slightly larger font for nested items */
+        }
+        ul.list-square li:hover {
+            transform: translateX(0); /* Disable horizontal slide on hover for nested items */
+            box-shadow: none;
+            border-left: none;
+        }
+        ul.list-square li::before {
+            display: none; /* Hide custom bullet for nested list, use native square */
+        }
+
+
+        /* LA LIMIT Homepage Specific Styles */
+        .la-limit-home-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 120px); /* Full viewport height minus header/footer */
+            text-align: center;
+            background: linear-gradient(180deg, var(--color-secondary-blue-light), var(--color-background-light));
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 1rem;
+            margin: 1.5rem auto; /* Center the container */
+            max-width: 90%; /* Adjust width for better responsiveness */
+        }
+        .la-limit-home-container h2 {
+            font-size: 3rem;
+            color: var(--color-primary-dark-blue);
+            margin-bottom: 1rem;
+            animation: slideInTop 1s ease-out forwards;
+        }
+        .la-limit-home-container p {
+            font-size: 1.25rem;
+            color: var(--color-text-dark);
+            max-width: 700px;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            animation: fadeInText 1.5s ease-out forwards;
+            animation-delay: 0.5s;
+            opacity: 0; /* Start hidden for animation */
+        }
+        .la-limit-home-container .cta-button {
+            background-color: var(--color-accent-yellow);
+            color: var(--color-primary-dark-blue);
+            padding: 1rem 2.5rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: popIn 1s ease-out forwards;
+            animation-delay: 1s;
+            opacity: 0; /* Start hidden for animation */
+        }
+        .la-limit-home-container .cta-button:hover {
+            background-color: #fdd835; /* Slightly darker yellow */
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes slideInTop {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInText {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Utility class to hide elements */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 767px) { /* Small screens (mobile) */
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            .header-content h1 {
+                font-size: 2rem;
+                text-align: center;
+                color: var(--color-accent-yellow); /* Make title yellow on mobile header */
+            }
+            .header-content p {
+                font-size: 1rem;
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+            .header-content .contact-button {
+                margin-top: 1rem;
+                margin-left: 0 !important; /* Override ml-auto */
+            }
+
+            /* Mobile navigation toggle */
+            .md\:flex-row {
+                flex-direction: column;
+            }
+            .md\:w-1\/4 {
+                width: 100%;
+            }
+            .md\:w-3\/4 {
+                width: 100%;
+            }
+
+            /* Sidebar specific for mobile */
+            #sidebar-nav {
+                display: none; /* Hidden by default on mobile */
+                position: fixed;
+                top: 0;
+                right: 0; /* Align to right for RTL */
+                width: 70%; /* Adjust width as needed */
+                height: 100%;
+                background-color: white;
+                z-index: 1000;
+                padding: 1.5rem;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2); /* Shadow on left for RTL */
+                overflow-y: auto;
+                transition: transform 0.3s ease-in-out;
+                transform: translateX(100%); /* Start off-screen to the right */
+            }
+            #sidebar-nav.open {
+                display: flex; /* Show when open */
+                transform: translateX(0%); /* Slide in */
+            }
+            .nav-button {
+                width: 100%;
+                text-align: right;
+                margin-bottom: 0.5rem;
+            }
+            .nav-button:last-child {
+                margin-bottom: 0;
+            }
+
+            /* Hamburger menu icon */
+            .menu-toggle-button {
+                display: none; /* Hidden by default, shown by JS when study is active */
+                position: fixed;
+                top: 1.5rem;
+                right: 1.5rem; /* Position to the right for RTL */
+                background-color: rgba(255, 215, 0, 0.9); /* Yellow with 90% opacity */
+                color: var(--color-primary-dark-blue);
+                padding: 0.75rem 1rem;
+                border-radius: 0.5rem;
+                font-size: 1.25rem;
+                cursor: pointer;
+                z-index: 1001; /* Above sidebar */
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease;
+            }
+            /* Class to show the hamburger menu button when study is active */
+            .menu-toggle-button.visible-on-study {
+                display: block; /* Show on mobile when study content is active */
+            }
+            /* Class to hide the hamburger menu button when scrolling stops and not at top */
+            .menu-toggle-button.hidden-on-scroll {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+
+            /* Close button for sidebar */
+            #sidebar-close-button {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                left: 1rem; /* Align to left for RTL */
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--color-primary-dark-blue);
+                cursor: pointer;
+                z-index: 1002;
+            }
+
+            /* Overlay for when sidebar is open */
+            #overlay {
+                display: none; /* Hidden by default */
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+            #overlay.visible {
+                display: block;
+            }
+
+            /* Adjust table display for mobile */
+            /* Hide the original table on mobile */
+            .study-section-content table {
+                display: none;
+            }
+
+            /* Scroll to top button for mobile */
+            #scroll-to-top-btn {
+                position: fixed;
+                bottom: 20px;
+                left: 20px; /* Position to the left for RTL */
+                background-color: var(--color-accent-yellow);
+                color: var(--color-primary-dark-blue);
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+                z-index: 900; /* Below sidebar overlay */
+            }
+            #scroll-to-top-btn.visible {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(-5px); /* Slight lift when visible */
+            }
+            #scroll-to-top-btn:hover {
+                background-color: #fdd835;
+            }
+
+            /* Scroll to bottom button for mobile */
+            #scroll-to-bottom-btn {
+                position: fixed;
+                bottom: 20px;
+                right: 20px; /* Position to the right for RTL */
+                background-color: var(--color-accent-yellow);
+                color: var(--color-primary-dark-blue);
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+                z-index: 900; /* Below sidebar overlay */
+            }
+            #scroll-to-bottom-btn.visible {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(-5px); /* Slight lift when visible */
+            }
+            #scroll-to-bottom-btn:hover {
+                background-color: #fdd835;
+            }
+
+            /* Modal for table display on mobile */
+            .table-modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                display: none; /* Changed to none by default */
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease-in-out;
+            }
+            .table-modal.visible {
+                opacity: 1;
+                pointer-events: auto;
+                display: flex; /* Ensure it's flex when visible */
+            }
+            .table-modal-content {
+                background-color: white;
+                padding: 1.5rem;
+                border-radius: 1rem;
+                max-width: 95%;
+                max-height: 90%;
+                overflow: hidden; /* Contains the scrollable table */
+                display: flex;
+                flex-direction: column;
+                position: relative;
+            }
+            .table-modal-content .close-button {
+                position: absolute;
+                top: 0.5rem;
+                left: 0.5rem;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--color-primary-dark-blue);
+                cursor: pointer;
+                z-index: 10;
+            }
+            .table-modal-content h3 {
+                color: var(--color-primary-dark-blue);
+                margin-bottom: 1rem;
+                text-align: center;
+                border-bottom: none; /* Remove dashed border for modal title */
+                display: block; /* Ensure it takes full width */
+            }
+            .table-modal-scroll-wrapper {
+                overflow-x: auto; /* Enable horizontal scrolling for the table */
+                -webkit-overflow-scrolling: touch;
+                flex-grow: 1; /* Allow wrapper to take available height */
+            }
+            .table-modal-scroll-wrapper table {
+                display: table; /* Revert to standard table display */
+                width: max-content; /* Allow table to grow as needed */
+                min-width: 100%; /* Ensure it takes at least 100% width */
+                border-collapse: collapse;
+                border-spacing: 0;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .table-modal-scroll-wrapper thead {
+                display: table-header-group; /* Show headers */
+            }
+            .table-modal-scroll-wrapper tbody {
+                display: table-row-group; /* Show body as row group */
+            }
+            .table-modal-scroll-wrapper tr {
+                display: table-row; /* Show rows as table rows */
+                border: none;
+                box-shadow: none;
+                margin-bottom: 0;
+            }
+            .table-modal-scroll-wrapper th,
+            .table-modal-scroll-wrapper td {
+                display: table-cell; /* Show cells as table cells */
+                white-space: nowrap; /* Prevent wrapping */
+                padding: 0.75rem 1rem;
+                border-bottom: 1px solid var(--color-secondary-blue-light);
+                text-align: right;
+            }
+            .table-modal-scroll-wrapper td::before {
+                content: none; /* Hide data-label in modal table */
+            }
+        }
+        /* Desktop-specific styles for sidebar */
+        @media (min-width: 768px) {
+            #sidebar-nav {
+                display: flex !important; /* Ensure it's always flex on desktop */
+                position: sticky; /* Make it sticky */
+                top: 20px; /* Distance from top of viewport */
+                align-self: flex-start; /* Ensure it sticks to the top of its flex container */
+                width: 25% !important; /* Ensure desktop width */
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Re-apply desktop shadow */
+                transform: translateX(0%) !important; /* Ensure no transform */
+            }
+            /* Hide hamburger menu and overlay on desktop */
+            .menu-toggle-button, #overlay, #sidebar-close-button {
+                display: none !important;
+            }
+            /* Ensure original table is visible on desktop */
+            .study-section-content .overflow-x-auto { /* Target the div wrapper */
+                display: none; /* Hide all table wrappers by default on desktop */
+            }
+            #market-analysis .overflow-x-auto { /* Only show the table wrapper in market-analysis section on desktop */
+                display: block; /* Use block for the div wrapper */
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="header-bg text-white p-6 shadow-lg rounded-b-xl">
+            <div class="container flex flex-col md:flex-row justify-between items-center header-content">
+                <!-- Changed h1 color to yellow for better visibility -->
+                <h1 class="text-3xl font-bold mb-4 md:mb-0 text-yellow-400">مجمع تبيان التعليمي</h1>
+                <p class="text-xl">دراسة تسويقية وتحليلية شاملة</p>
+                <!-- "تواصل معنا" button - Adjusted margin for better spacing -->
+                <a href="tel:0935031226" class="bg-yellow-400 text-blue-900 font-bold py-2 px-6 rounded-full shadow-md hover:bg-yellow-300 transition duration-300 ease-in-out transform hover:scale-105 mt-4 md:mt-0 md:mr-4 contact-button">
+                    تواصل معنا
+                </a>
+            </div>
+        </header>
+
+        <!-- Hamburger menu icon for mobile (Fixed position) -->
+        <!-- Initially hidden, will be shown by JS when study content is active -->
+        <button class="menu-toggle-button md:hidden" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- LA LIMIT Homepage Container -->
+        <div id="la-limit-home-page" class="flex-grow flex items-center justify-center p-6">
+            <section class="la-limit-home-container">
+                <h2 class="font-bold">LA LIMIT</h2>
+                <p class="text-center">
+                    نحن في <strong>LA LIMIT</strong> نفخر بتقديم هذه الدراسة التسويقية والتحليلية الشاملة لمجمع تبيان التعليمي.
+                    بخبرتنا في تحليل الأسواق ووضع الاستراتيجيات المبتكرة، قمنا بإعداد هذا التقرير ليكون بوابتكم نحو النجاح والتميز في القطاع التعليمي بسوريا.
+                    نسعى دائمًا لتقديم حلول تسويقية متكاملة تضمن النمو والانتشار لشركائنا.
+                </p>
+                <button class="cta-button" onclick="showStudy()">
+                    اكتشف الدراسة الآن
+                </button>
+            </section>
+        </div>
+
+        <!-- Main Content Area for Study (Initially Hidden) -->
+        <div id="study-main-content" class="container flex-grow flex flex-col md:flex-row gap-6 p-6 hidden">
+            <!-- Overlay for mobile sidebar -->
+            <div id="overlay" class="hidden" onclick="toggleSidebar()"></div>
+
+            <!-- Sidebar Navigation -->
+            <nav id="sidebar-nav" class="w-full bg-white p-6 rounded-xl shadow-md flex-col space-y-3">
+                <button id="sidebar-close-button" class="md:hidden" onclick="toggleSidebar()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h2 class="text-xl font-semibold mb-4 text-blue-800">أقسام الدراسة</h2>
+                <!-- "العودة إلى الصفحة الرئيسية" button -->
+                <button class="nav-button py-3 px-4 text-right text-lg font-medium" onclick="showSection('home')">
+                    العودة إلى الصفحة الرئيسية
+                </button>
+                <button class="nav-button py-3 px-4 text-right text-lg font-medium" onclick="showSection('market-analysis')">
+                    1. المشهد التعليمي السوري
+                </button>
+                <button class="nav-button py-3 px-4 text-right text-lg font-medium" onclick="showSection('course-offerings')">
+                    2. عروض الدورات التفصيلية
+                </button>
+                <button class="nav-button py-3 px-4 text-right text-lg font-medium" onclick="showSection('competitive-landscape')">
+                    3. المشهد التنافسي
+                </button>
+                <button class="nav-button py-3 px-4 text-right text-lg font-medium" onclick="showSection('growth-strategies')">
+                    4. استراتيجيات النمو والاستدامة
+                </button>
+                <button class="nav-button py-3 px-4 text-right text-lg font-medium" onclick="showSection('marketing-strategy')">
+                    5. استراتيجية التسويق والانتشار
+                </button>
+                <button class="nav-button py-3 px-4 text-right text-lg font-medium" onclick="showSection('operational-framework')">
+                    6. الإطار التشغيلي
+                </button>
+            </nav>
+
+            <!-- Content Display Area for Study Sections -->
+            <main class="w-full md:w-3/4 bg-white p-8 rounded-xl shadow-md overflow-hidden">
+                <!-- 1. المشهد التعليمي السوري: تحليل السوق والفرص -->
+                <section id="market-analysis" class="study-section-content">
+                    <h2 class="text-2xl mb-4 pb-2 border-b border-blue-200">1. المشهد التعليمي السوري: تحليل السوق والفرص</h2>
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">التحديات والفجوات الحالية في التعليم السوري</h3>
+                    <p class="mb-4 leading-relaxed">يعاني قطاع التعليم في سوريا من تحديات عميقة وتدهور كبير في جميع مراحله منذ عام 2011. هذه التحديات خلقت فجوة هائلة في جودة التعليم والفرص المتاحة، مما يبرز الحاجة الملحة للحلول التعليمية البديلة والخاصة.</p>
+                    <ul class="list-disc space-y-2 mb-4">
+                        <li><p>**ارتفاع معدلات التسرب وتدهور النظام:** تشير الدراسات إلى تسرب أكثر من 1.1 مليون طالب من التعليم منذ عام 2011. هذا التسرب الهائل يعود إلى تدهور العملية التربوية من ناحية المناهج وتوفير المتطلبات، بالإضافة إلى انعدام الأمن والفقر وانهيار الليرة السورية. ما يقرب من ثلث الطلاب المسجلين في البيانات الرسمية لا يكملون المرحلة الابتدائية.</p></li>
+                        <li><p>**نقص البنية التحتية والكوادر المؤهلة:** تعرض أكثر من 7,000 مدرسة للضرر أو التدمير. كما توجد مشكلة في قلة الكوادر التدريسية وانخفاض مستويات الكثير من المعلمين، خاصة بعد عام 2015، بسبب موجات الهجرة والاستقالة والتجنيد، مما أثر سلباً على جودة التعليم.</p></li>
+                        <li><p>**الضغوط الاقتصادية كعائق:** تُعد الظروف الاقتصادية الصعبة السبب الرئيسي وراء تسرب الطلاب، حيث تضطر العديد من الأسر إلى إخراج أبنائها من المدارس وإدخالهم في سوق العمل للمساهمة في تأمين متطلبات المعيشة.</p></li>
+                        <li><p>**قضايا المناهج والشهادات:** هناك تعدد في المناهج الدراسية داخل الخريطة السورية، مما يثير إشكالية الاعتراف الرسمي بالشهادات الصادرة.</p></li>
+                    </ul>
+                    <p class="mb-4 leading-relaxed">تُشير هذه التحديات إلى وجود سوق ضخم غير مُخدَّم، وطلب كبير على بدائل تعليمية. العدد الكبير من المتسربين من التعليم، إلى جانب الضغوط الاقتصادية، يخلق شريحة واسعة من الأفراد الذين لا يستطيعون الوصول إلى التعليم التقليدي أو تحمل تكاليفه، أو الذين يحتاجون إلى مهارات سريعة لدخول سوق العمل. قرار وزارة التعليم بالسماح للطلاب المنقطعين منذ عام 2011 بالتقدم للامتحانات. هذا السياق يشير إلى سوق قوي للمؤسسات الخاصة التي يمكنها تقديم برامج مرنة وعالية الجودة وموجهة نحو الوظائف، كبديل أو مكمل للنظام العام المتعثر. النهج المتعدد الأوجه لمجمع تبيان، من الدورات الأكاديمية التكميلية إلى التدريب المهني، يلبي هذه الاحتياجات المتنوعة بشكل مباشر.</p>
+
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">إمكانات النمو وفرص الاستثمار في التعليم الخاص</h3>
+                    <p class="mb-4 leading-relaxed">على الرغم من التحديات، يمثل قطاع التعليم الخاص في سوريا فرصة استثمارية واعدة، حيث يُنظر إليه كـ "بوابة لمستقبل مشرق".</p>
+                    <ul class="list-disc space-y-2 mb-4">
+                        <li><p>**الطلب المتزايد على حلول القطاع الخاص:** يشهد الاستثمار في التعليم الخاص اهتماماً متزايداً على مستوى العالم. الوضع المتردي للتعليم العام يدفع الأسر الميسورة نحو التعليم الخاص.</p></li>
+                        <li><p>**التركيز على البرامج المتخصصة:** تقدم المعاهد الخاصة برامج تعليمية مصممة خصيصاً لتلبية احتياجات الطلاب المتنوعة، بما في ذلك ذوي الاحتياجات الخاصة أو المواهب المتميزة، وذلك باستخدام أساليب تدريس مبتكرة ودعم متخصص.</p></li>
+                        <li><p>**دمج التكنولوجيا:** يعزز استخدام التكنولوجيا تجربة التعلم في المدارس الخاصة، من خلال توفير محتوى تعليمي تفاعلي.</p></li>
+                        <li><p>**التأثير الاجتماعي والاقتصادي:** يساهم الاستثمار في التعليم الخاص في تعزيز التنمية المجتمعية والاقتصادية، عبر توفير فرص تعليمية متميزة ترفع من مستوى التعليم وتزيد من معدلات النجاح والتمكين الاقتصادي للأفراد والمجتمع.</p></li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">الشرائح المستهدفة في السوق</h3>
+                    <p class="mb-4 leading-relaxed">يستهدف مجمع تبيان التعليمي عدة شرائح ديموغرافية رئيسية في السوق السوري:</p>
+                    <ul class="list-disc space-y-2 mb-4">
+                        <li><p>**الشباب والمتسربون من المدارس:** تمثل هذه الشريحة الكبيرة من الشباب الذين تسربوا من التعليم، أو الذين يبحثون عن فرص لإعادة الاندماج في العملية التعليمية، أو اكتساب مهارات مهنية سريعة لدخول سوق العمل، جمهوراً رئيسياً للمجمع.</p></li>
+                        <li><p>**خريجو الثانوية العامة:** يستهدف المجمع الطلاب الذين أنهوا الثانوية العامة ويبحثون عن دورات تحضيرية للجامعة أو مسارات بديلة مثل التدريب المهني والفني.</p></li>
+                        <li><p>**المهنيون والبالغون:** تشمل هذه الشريحة الأفراد الذين يسعون إلى تطوير مهاراتهم الحالية، أو اكتساب مهارات جديدة، أو متابعة التطور الشخصي في المجالات العصرية.</p></li>
+                        <li><p>**المجتمع الدولي:** الدبلوماسيون، موظفو المنظمات الدولية، وعائلاتهم، بالإضافة إلى الأجانب الآخرين الذين يرغبون في تعلم اللغة العربية لأغراض مهنية أو شخصية.</p></li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">جدول: تحديات وفرص التعليم السوري</h3>
+                    <!-- Button to open the table modal (visible on mobile only) -->
+                    <div class="flex justify-center mt-4 mb-8 md:hidden">
+                        <button class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105" onclick="openTableModal('market-analysis-table')">
+                            عرض جدول: تحديات وفرص التعليم السوري
+                        </button>
+                    </div>
+                    <!-- Original table (hidden on mobile, visible on desktop) -->
+                    <!-- Removed 'hidden' class from here to allow CSS to control display on desktop -->
+                    <div class="overflow-x-auto rounded-xl">
+                        <table class="min-w-full bg-white">
+                            <thead>
+                                <tr>
+                                    <th class="py-3 px-4 text-right">التحديات الرئيسية في التعليم السوري</th>
+                                    <th class="py-3 px-4 text-right">الفرص الرئيسية لمجمع تبيان التعليمي</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="py-3 px-4" data-label="التحديات الرئيسية في التعليم السوري">ارتفاع معدلات التسرب (أكثر من 1.1 مليون)</td>
+                                    <td class="py-3 px-4" data-label="الفرص الرئيسية لمجمع تبيان التعليمي">سوق ضخم وغير مُخدَّم من الشباب الباحثين عن فرص تعليمية أو مهنية.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4" data-label="التحديات الرئيسية في التعليم السوري">تدهور البنية التحتية (7,000 مدرسة متضررة/مدمرة)</td>
+                                    <td class="py-3 px-4" data-label="الفرص الرئيسية لمجمع تبيان التعليمي">إمكانية تقديم بيئة تعليمية حديثة ومجهزة بالكامل.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4" data-label="التحديات الرئيسية في التعليم السوري">نقص الكوادر التدريسية المؤهلة</td>
+                                    <td class="py-3 px-4" data-label="الفرص الرئيسية لمجمع تبيان التعليمي">جذب وتدريب معلمين ذوي كفاءة لتقديم تعليم عالي الجودة.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4" data-label="التحديات الرئيسية في التعليم السوري">الضغوط الاقتصادية تدفع للتسرب</td>
+                                    <td class="py-3 px-4" data-label="الفرص الرئيسية لمجمع تبيان التعليمي">تقديم برامج مهنية تضمن فرص عمل سريعة ودخلاً مستقراً.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4" data-label="التحديات الرئيسية في التعليم السوري">قضايا المناهج والاعتراف بالشهادات</td>
+                                    <td class="py-3 px-4" data-label="الفرص الرئيسية لمجمع تبيان التعليمي">التركيز على جودة المناهج وتقديم شهادات معترف بها محلياً ودولياً.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4" data-label="التحديات الرئيسية في التعليم السوري"></td>
+                                    <td class="py-3 px-4" data-label="الفرص الرئيسية لمجمع تبيان التعليمي">طلب متزايد على التعليم الخاص المتخصص.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4" data-label="التحديات الرئيسية في التعليم السوري"></td>
+                                    <td class="py-3 px-4" data-label="الفرص الرئيسية لمجمع تبيان التعليمي">إمكانية دمج التكنولوجيا المتقدمة في التعليم.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4" data-label="التحديات الرئيسية في التعليم السوري"></td>
+                                    <td class="py-3 px-4" data-label="الفرص الرئيسية لمجمع تبيان التعليمي">حاجة ملحة لمهارات جاهزة لسوق العمل في إعادة الإعمار والقطاعات الناشئة.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4" data-label="التحديات الرئيسية في التعليم السوري"></td>
+                                    <td class="py-3 px-4" data-label="الفرص الرئيسية لمجمع تبيان التعليمي">وجود دورات مهنية وفكرية شائعة (ترند) في الوقت الحالي.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Navigation Buttons for Mobile -->
+                    <div class="flex justify-center mt-8 space-x-4 md:hidden">
+                        <!-- Only Next button for the first section -->
+                        <button class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 min-w-[150px]" onclick="showNextSection()">
+                            القسم التالي <i class="fas fa-arrow-left mr-2"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 2. عروض الدورات التفصيلية واستراتيجية المناهج -->
+                <section id="course-offerings" class="study-section-content">
+                    <h2 class="text-2xl mb-4 pb-2 border-b border-blue-200">2. عروض الدورات التفصيلية واستراتيجية المناهج</h2>
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">الطابق الأكاديمي: برامج تحضيرية للبكالوريا والتاسع</h3>
+                    <p class="mb-4 leading-relaxed">يُعد هذا الطابق حجر الزاوية للمجمع في استهداف شريحة كبيرة من الطلاب السوريين الذين يسعون لتحسين فرصهم في الامتحانات الوطنية والالتحاق بالجامعات.</p>
+                    <ul class="list-disc space-y-2 mb-4">
+                        <li><p>**الحاجة السوقية:** هناك طلب كبير على التعليم التكميلي بسبب التحديات التي يواجهها النظام التعليمي العام. يسعى الأهالي إلى تعليم عالي الجودة لرفع معدلات نجاح أبنائهم في الامتحانات الوطنية.</p></li>
+                        <li><p>**المقدمون الحاليون:** توجد مؤسسات مثل "مدارس نهج المتفوقين النموذجية الخاصة" التي تقدم دورات تحضيرية للتاسع والبكالوريا. كما تنتشر الدروس الخصوصية بأسعار مرتفعة، حيث يمكن أن تصل ساعة الرياضيات للبكالوريا إلى 100 ألف ليرة سورية، ودورات البكالوريا المكثفة إلى مليون ليرة سورية على الأقل.</p></li>
+                        <li><p>**ميزة التوقيت:** يمكن للمجمع الاستفادة من الفترة التي تلي إعلان نتائج البكالالوريا (حوالي 20 يوليو لعام 2025)، والفترة التي تسبق التسجيل الجامعي، واقتراب الفصل الدراسي الجديد.</p></li>
+                        <li><p>**البرامج المقترحة:**
+                                <ul class="list-circle space-y-2 ml-4">
+                                    <li><p>دورات مراجعة مكثفة لامتحاني التاسع والبكالوريا.</p></li>
+                                    <li><p>ورش عمل متخصصة لمواد معينة (مثل الرياضيات، الفيزياء، الكيمياء، الإنجليزية، العربية).</p></li>
+                                    <li><p>تحضير لامتحانات القبول الجامعي لمختلف الكليات.</p></li>
+                                </ul>
+                        </p></li>
+                        <li><p>**معدلات النجاح والطلب المتوقع:** يُتوقع طلب مرتفع (80-90% من سعة التسجيل للدورات المسوقة جيداً) نظراً للأهمية الحاسمة لهذه الامتحانات في تحديد المسارات المستقبلية للطلاب. يمكن استهداف معدلات نجاح تتراوح بين 70-85% للطلاب الذين يكملون البرنامج في الامتحانات الوطنية، مما سيضع تبيان في موقع ريادي.</p></li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">الطابق المهني: تحليل المهارات المهنية المطلوبة</h3>
+                    <p class="mb-4 leading-relaxed">يركز هذا الطابق على تزويد الطلاب بالمهارات العملية التي تلبي احتياجات سوق العمل السوري المتغيرة، خاصة في ظل جهود إعادة الإعمار.</p>
+                    <ul class="list-disc space-y-2 mb-4">
+                        <li><p>**المشهد الحالي:** تقدم وزارة الأشغال العامة والإسكان دورات تدريبية مجانية في قطاعي التشييد والبناء لعام 2025، وتشمل اختصاصات مثل التمديدات الكهربائية، السباكة، النجارة، التدفئة والتكييف، الطاقة الشمسية، اللحام، الدهان والديكور، وتركيب الألمنيوم. كما تقدم مراكز أخرى دورات في المعلوماتية، الخياطة، الحلاقة، والزراعة.</p></li>
+                        <li><p>**الدورات المهنية المقترحة الرائجة:**
+                                <ul class="list-circle space-y-2 ml-4">
+                                    <li><p>التسويق الرقمي والتجارة الإلكترونية: هناك طلب مرتفع على المهارات الرقمية، وهي ضرورية للأعمال في الاقتصاد الرقمي المتنامي.</p></li>
+                                    <li><p>تطعيم الصدف: تُعد هذه الحرفة السورية التقليدية ذات قيمة عالية ولها سوق للمنتجات التراثية. يمكن أن تُقدم كمهارة فنية فريدة.</p></li>
+                                    <li><p>السيراميك: تُذكر كحرفة مهنية شائعة حالياً، ولها سوق للمنتجات اليدوية.</p></li>
+                                    <li><p>مهارات أخرى عالية الطلب:
+                                            <ul class="list-square space-y-2"> <!-- Removed ml-8 here to reduce nested indentation -->
+                                                <li><p>حرف البناء والتشييد: نظراً للحاجة إلى إعادة الإعمار، فإن دورات في التمديدات الكهربائية المتقدمة، أنظمة السباكة الحديثة، ممارسات البناء المستدام، والنجارة المتخصصة (مثل الأثاث النمطي) ستكون ذات صلة عالية.</p></li>
+                                                <li><p>تركيب وصيانة الطاقة المتجددة: خاصة الطاقة الشمسية نظراً لتحديات الطاقة في سوريا.</p></li>
+                                                <li><p>صيانة الهواتف المحمولة والإلكترونيات: طلب محلي مرتفع على خدمات الإصلاح.</p></li>
+                                                <li><p>الطبخ الاحترافي والضيافة: طلب دائم في قطاع الخدمات.</p></li>
+                                            </ul>
+                                    </p></li>
+                                </ul>
+                        </p></li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">الطابق الفني/التقني: تحليل المهارات الفنية والتقنية الرائجة</h3>
+                    <p class="mb-4 leading-relaxed">يستجيب هذا الطابق للطلب المتزايد على المهارات الرقمية والإبداعية التي تدفع عجلة الاقتصاد الحديث.</p>
+                    <ul class="list-disc space-y-2 mb-4">
+                        <li><p>**المهارات المطلوبة:**
+                                <ul class="list-circle space-y-2 ml-4">
+                                    <li><p>المونتاج وتحرير الفيديو: هناك طلب مرتفع على محرري الفيديو في سوريا، مع فرص عمل تتراوح بين العمل الحر والدوام الكامل. (يمكن التعاقد مع شركات كبرى لتوظيف الخريجين بشكل فوري بالإضافة لاستثمار القرار الذي يقدم شهادة نقابية لهذه المهن).</p></li>
+                                    <li><p>التصميم الجرافيكي: مهارة تقنية مطلوبة، مع وجود دورات متخصصة وفرص عمل.</p></li>
+                                    <li><p>استراتيجيات التسويق الرقمي: ضرورية للأعمال التجارية.</p></li>
+                                    <li><p>البرمجة وتطوير التطبيقات: مهارات تقنية ذات قيمة عالية.</p></li>
+                                    <li><p>الأمن السيبراني/تحليل البيانات: مهارات تقنية حديثة (غير متوفرة حالياً لكنها مهمة جداً مستقبلاً).</p></li>
+                                </ul>
+                        </p></li>
+                        <li><p>**الدورات المقترحة:**
+                                <ul class="list-circle space-y-2 ml-4">
+                                    <li><p>مونتاج الفيديو والموشن جرافيكس: دورات شاملة تغطي البرمجيات (مثل دافينشي ريزولف)، السرد القصصي، وتحسين المحتوى لوسائل التواصل الاجتماعي.</p></li>
+                                    <li><p>التصميم الجرافيكي والعلامات التجارية: من المبادئ الأساسية إلى البرمجيات المتقدمة (مجموعة أدوبي).</p></li>
+                                    <li><p>إنشاء المحتوى لوسائل التواصل الاجتماعي: يجمع بين مونتاج الفيديو، التصميم الجرافيكي، ومبادئ التسويق الرقمي.</p></li>
+                                    <li><p>التصوير الفوتوغرافي والسينمائي: مهارات عملية لإنشاء المحتوى المرئي.</p></li>
+                                    <li><p>تصميم واجهة المستخدم وتجربة المستخدم (UI/UX): لتطبيقات الويب والهاتف المحمول، تلبية للحضور الرقمي المتزايد.</p></li>
+                                </ul>
+                        </p></li>
+                        <li><p>**معدلات النجاح وملاءمة الصناعة:** يُتوقع معدلات نجاح عالية جداً (85-95% فرص توظيف/عمل حر) نظراً للاقتصاد الرقمي المزدهر والطلب على مبدعي المحتوى والمصممين المهرة. هذه المهارات قابلة للنقل عالمياً، مما يزيد من دافعية الطلاب.</p></li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">الطابق السكني: برنامج اللغة العربية لغير الناطقين بها</h3>
+                    <p class="mb-4 leading-relaxed">يُقدم هذا الطابق ميزة تنافسية فريدة من خلال توفير بيئة تعليمية وسكنية متكاملة للطلاب الأجانب.</p>
+                    <ul class="list-disc space-y-2 mb-4">
+                        <li><p>**الطلب السوقي:** توجد معاهد قائمة مثل المعهد العالي للغات ومراكز لغوية أخرى تقدم دورات اللغة العربية لغير الناطقين بها. معهد وزارة التربية يستهدف بشكل خاص الدبلوماسيين وموظفي المنظمات الدولية وعائلاتهم.</p></li>
+                        <li><p>**هيكل البرنامج ومقومات البيع الفريدة:**
+                                <ul class="list-circle space-y-2 ml-4">
+                                    <li><p>برامج مكثفة: مصممة لاكتساب اللغة بسرعة.</p></li>
+                                    <li><p>الاندماج الثقافي: تتضمن ورش عمل ثقافية، رحلات، وتفاعلات لتعزيز التعلم.</p></li>
+                                    <li><p>وحدات مرنة: تقدم خيارات قصيرة الأجل (مثل 2-4 أسابيع) وطويلة الأجل (مثل 3-6 أشهر).</p></li>
+                                    <li><p>اللغة العربية المتخصصة: العربية للأعمال، العربية للإعلام، العربية الدبلوماسية.</p></li>
+                                    <li><p>المكون السكني: ميزة تنافسية رئيسية، توفر الراحة والأمان وبيئة غامرة بالكامل.</p></li>
+                                    <li><p>مدربون ذوو خبرة: تسليط الضوء على مؤهلاتهم ومنهجيات التدريس.</p></li>
+                                </ul>
+                        </p></li>
+                        <li><p>**تحليل الجمهور المستهدف:** الدبلوماسيون، موظفو المنظمات غير الحكومية، المهنيون في الأعمال التجارية الدولية، الطلاب الأجانب، والمغتربون المهتمون بتعلم اللغة العربية لأسباب مهنية أو شخصية.</p></li>
+                        <li><p>**معدلات النجاح والطلب المتوقع:** يُتوقع طلب متوسط إلى مرتفع (60-80% من سعة التسجيل) لسوق متخصص وذو قيمة عالية. يمكن أن تصل معدلات النجاح بناءً على مكاسب الكفاءة (مثل مستويات الإطار الأوروبي المشترك المرجعي للغات) إلى 80-90% للطلاب المتفانين.</p></li>
+                    </ul>
+                    <!-- Navigation Buttons for Mobile -->
+                    <div class="flex justify-center mt-8 space-x-4 md:hidden">
+                        <button class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 min-w-[150px]" onclick="showPreviousSection()">
+                            <i class="fas fa-arrow-right ml-2"></i> القسم السابق
+                        </button>
+                        <button class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 min-w-[150px]" onclick="showNextSection()">
+                            القسم التالي <i class="fas fa-arrow-left mr-2"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 3. المشهد التنافسي -->
+                <section id="competitive-landscape" class="study-section-content">
+                    <h2 class="text-2xl mb-4 pb-2 border-b border-blue-200">3. المشهد التنافسي</h2>
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">تحليل المراكز التعليمية والتدريبية القائمة في دمشق</h3>
+                    <p class="mb-4 leading-relaxed">التحضير الأكاديمي: تتواجد مؤسسات مثل "مدارس نهج المتفوقين النموذجية الخاصة" ، بالإضافة إلى انتشار واسع للدروس الخصوصية.</p>
+                    <p class="mb-4 leading-relaxed">مراكز اللغات: يشمل المنافسون معاهد مرموقة مثل المعهد العالي للغات ، ومركز اللغة الأمريكي (ALC) والعديد من المعاهد الخاصة الأخرى.</p>
+                    <p class="mb-4 leading-relaxed">المراكز المهنية/التقنية: تعمل جهات مثل الجمعية العلمية السورية للمعلوماتية ، ومركز الأعمال الأوروبي للتدريب ، ومراكز الأونروا للتدريب المهني ، والمراكز المهنية الحكومية. كما توجد أكاديميات خاصة مثل "أكاديميا للتدريب والاستشارات" و"مركز زدني علماً".</p>
+
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">التموضع التنافسي ومقترحات القيمة</h3>
+                    <p class="mb-4 leading-relaxed">لتحقيق التميز في هذا السوق، يجب أن يركز مجمع تبيان على مقومات القيمة التالية:</p>
+                    <ul class="list-disc space-y-2 mb-4">
+                        <li><p>**النموذج المتكامل:** تقديم انتقال سلس بين المسارات الأكاديمية والمهنية والفنية.</p></li>
+                        <li><p>**الجودة والمناهج الحديثة:** التأكيد على المحتوى المحدث، المهارات العملية، وملاءمة المناهج لمتطلبات الصناعة.</p></li>
+                        <li><p>**هيئة تدريس ذات خبرة:** تسليط الضوء على كفاءة المدربين، مع إمكانية الاستفادة من خبرات الفرع التركي.</p></li>
+                        <li><p>**مرافق حديثة:** الاستفادة من تصميم المجمع ذي الطوابق الأربعة، بما في ذلك المختبرات المتخصصة وورش العمل والوحدات السكنية.</p></li>
+                        <li><p>**التركيز على المسار المهني:** التأكيد القوي على قابلية التوظيف ومهارات ريادة الأعمال للبرامج المهنية والفنية.</p></li>
+                        <li><p>**الغمر الثقافي:** لبرنامج اللغة العربية، التأكيد على التجربة السورية الأصيلة.</p></li>
+                    </ul>
+                    <!-- Navigation Buttons for Mobile -->
+                    <div class="flex justify-center mt-8 space-x-4 md:hidden">
+                        <button class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 min-w-[150px]" onclick="showPreviousSection()">
+                            <i class="fas fa-arrow-right ml-2"></i> القسم السابق
+                        </button>
+                        <button class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 min-w-[150px]" onclick="showNextSection()">
+                            القسم التالي <i class="fas fa-arrow-left mr-2"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 4. استراتيجيات النمو والتوسع والاستدامة -->
+                <section id="growth-strategies" class="study-section-content">
+                    <h2 class="text-2xl mb-4 pb-2 border-b border-blue-200">4. استراتيجيات النمو والتوسع والاستدامة</h2>
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">الشراكات والمشاركة المجتمعية</h3>
+                    <p class="mb-4 leading-relaxed">شراكات صناعية: التعاون مع الشركات والصناعات المحلية (مثل شركات البناء، دور الإنتاج الإعلامي، ورش الحرف اليدوية) لتوفير التدريب المهني، وفرص التدريب العملي (Internship)، وتسهيل التوظيف. هذا يتماشى مع الحاجة إلى عمالة ماهرة والطلب على المهارات الرقمية.</p>
+                    <p class="mb-4 leading-relaxed">المنظمات غير الحكومية والمنظمات الدولية: الشراكة مع المنظمات الإنسانية لتقديم برامج تدريب مهني تستهدف الشباب المعرضين للخطر أو المتسربين من المدارس، مما قد يوفر التمويل وفرص الوصول إلى شرائح أوسع. تعمل الأونروا بالفعل على إدارة مراكز تدريب مهني.</p>
+                    <p class="mb-4 leading-relaxed">الجهات الحكومية: استكشاف فرص الشراكة بين القطاعين العام والخاص، كما تشجع وزارة التعليم العالي ووزارة الأشغال العامة.</p>
+                    <p class="mb-4 leading-relaxed">المراكز المجتمعية المحلية: تقديم ورش عمل أو دورات تعريفية لبناء الثقة والوعي بالمجمع داخل المجتمع.</p>
+
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">ضمان الجودة والاعتماد والتحسين المستمر</h3>
+                    <p class="mb-4 leading-relaxed">تطوير المناهج: تحديث الدورات بانتظام لتتوافق مع اتجاهات السوق واحتياجات أصحاب العمل، خاصة للمهارات المهنية والفنية.</p>
+                    <p class="mb-4 leading-relaxed">تدريب المدربين: الاستثمار في التطوير المهني المستمر لأعضاء هيئة التدريس.</p>
+                    <p class="mb-4 leading-relaxed">الاعتماد: السعي للحصول على الاعتماد المحلي والدولي للدورات لتعزيز المصداقية وقابلية توظيف الطلاب.</p>
+                    <p class="mb-4 leading-relaxed">ملاحظات الطلاب: تطبيق آليات قوية لجمع الملاحظات لضمان جودة البرامج ورضا الطلاب.</p>
+                    <!-- Navigation Buttons for Mobile -->
+                    <div class="flex justify-center mt-8 space-x-4 md:hidden">
+                        <button class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 min-w-[150px]" onclick="showPreviousSection()">
+                            <i class="fas fa-arrow-right ml-2"></i> القسم السابق
+                        </button>
+                        <button class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 min-w-[150px]" onclick="showNextSection()">
+                            القسم التالي <i class="fas fa-arrow-left mr-2"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 5. استراتيجية التسويق والانتشار الرقمي -->
+                <section id="marketing-strategy" class="study-section-content">
+                    <h2 class="text-2xl mb-4 pb-2 border-b border-blue-200">5. استراتيجية التسويق والانتشار الرقمي</h2>
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">الأهداف التسويقية الشاملة وتموضع العلامة التجارية</h3>
+                    <p class="mb-4 leading-relaxed">الهدف: ترسيخ مكانة تبيان كمجمع تعليمي رائد ومبتكر وموثوق في سوريا، معروف بجودته ومهاراته العملية ومساراته المهنية الواضحة.</p>
+                    <p class="mb-4 leading-relaxed">التموضع: "بوابتك إلى مستقبل مشرق في سوريا" – مع التركيز على اكتساب المهارات، النمو الشخصي، والتمكين الاقتصادي.</p>
+                    <p class="mb-4 leading-relaxed">الهوية البصرية : يجب توفر هوية بصرية متكاملة للمجمع بحيث تظهر تفاصيله وجودته.</p>
+
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">موقع إلكتروني احترافي: متعدد اللغات (العربية، الإنجليزية، التركية) مع وصف واضح للدورات، معلومات التسجيل، شهادات الطلاب، وقسم مخصص للبرنامج السكني.</h3>
+                    <p class="mb-4 leading-relaxed">موقع إلكتروني احترافي: متعدد اللغات (العربية، الإنجليزية، التركية) مع وصف واضح للدورات، معلومات التسجيل، شهادات الطلاب، وقسم مخصص للبرنامج السكني.</p>
+
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">استراتيجية وسائل التواصل الاجتماعي</h3>
+                    <p class="mb-4 leading-relaxed">اختيار المنصات ومشاركة الجمهور:</p>
+                    <ul class="list-disc space-y-2 mb-4">
+                        <li><p>**فيسبوك وإنستغرام:** منصات أساسية للوصول الواسع، المحتوى المرئي، والمشاركة المجتمعية.</p></li>
+                        <li><p>**تيك توك:** ضروري لنشر مقاطع الفيديو القصيرة والسريعة والوصول إلى الفئات العمرية الأصغر.</p></li>
+                        <li><p>**لينكد إن:** للدورات المهنية، الشراكات، وجذب الطلاب/الأساتذة الدوليين.</p></li>
+                        <li><p>**تليغرام وواتساب:** للتواصل المباشر، تحديثات الدورات، والمجموعات المجتمعية (شائعة في سوريا).</p></li>
+                    </ul>
+                    <p class="mb-4 leading-relaxed">استراتيجية المحتوى والتقويم:</p>
+                    <ul class="list-disc space-y-2 mb-4">
+                        <li><p>**مزيج من المحتوى:** نصائح تعليمية، قصص نجاح، لقطات من وراء الكواليس، تسليط الضوء على المدربين، شهادات الطلاب، أبرز الدورات، جلسات أسئلة وأجوبة.</p></li>
+                        <li><p>**حملات مواضيعية:** تتوافق مع الفرص الموسمية (مثل "دفعة البكالوريا"، "مهارات المستقبل").</p></li>
+                    </ul>
+                    <p class="mb-4 leading-relaxed">أفكار "الريلز" للانتشار السريع (لكل قسم):</p>
+                    <ul class="list-disc space-y-2 mb-4">
+                        <li><p>**عام/العلامة التجارية:**
+                                <ul class="list-circle space-y-2 ml-4">
+                                    <li><p>"يوم في تبيان": مونتاج سريع يظهر الطوابق المختلفة، تفاعل الطلاب، الفصول الدراسية. (جاذبية بصرية، يظهر التنوع).</p></li>
+                                    <li><p>"تعرف على خبرائنا": مقاطع فيديو قصيرة للمدربين يقدمون أنفسهم وشغفهم بالتدريس. (يبني الثقة، يسلط الضوء على الجودة).</p></li>
+                                    <li><p>"لماذا تبيان؟": شهادات سريعة من الطلاب/الأهالي حول تأثير تبيان. (دليل اجتماعي، اتصال عاطفي).</p></li>
+                                </ul>
+                        </p></li>
+                        <li><p>**الطابق الأكاديمي:**
+                                <ul class="list-circle space-y-2 ml-4">
+                                    <li><p>"نصائح سريعة للبكالوريا": مقاطع فيديو قصيرة وجذابة تحتوي على نصائح دراسية سريعة، حيل للامتحانات، أو أخطاء شائعة يجب تجنبها. (صلة عالية، قابلة للمشاركة).</p></li>
+                                    <li><p>"قصة نجاح التحضير الجامعي": مقابلة مع طالب التحق بالجامعة التي يرغب بها بعد التحضير في تبيان. (ملهمة، نتائج ملموسة).</p></li>
+                                    <li><p>"تسليط الضوء على مادة": شرح سريع لمفهوم معقد في الرياضيات/الفيزياء/الكيمياء، مما يجعله يبدو سهلاً. (قيمة مضافة، يوضح أسلوب التدريس).</p></li>
+                                    <li><p>"ماهو المستقبل": شرح مفصل عن المهن المستقبلية ونصائح عنها. (دليل اكاديمي، اتصال عاطفي).</p></li>
+                                </ul>
+                        </p></li>
+                        <li><p>**الطابق المهني:**
+                                <ul class="list-circle space-y-2 ml-4">
+                                    <li><p>"مهارة في 60 ثانية": فيديو سريع أو لقطات متقطعة تظهر أداء مهارة مهنية (مثل قطعة تطعيم صدف، تشكيل وعاء سيراميك، توصيل دائرة كهربائية أساسية). (جذاب بصرياً، يعرض مخرجات عملية).</p></li>
+                                    <li><p>"من الفصل إلى المهنة": مقابلات قصيرة مع خريجي الدورات المهنية وهم يعملون في وظائفهم الجديدة أو يبدأون أعمالهم الخاصة. (يُظهر قابلية التوظيف، يلهم).</p></li>
+                                    <li><p>"تنبيه حرفة رائجة": عرض حرفة فريدة ورائجة (مثل فن الريزن، صناعة الصابون المتقدمة) ودعوة الناس لتعلمها. (يخلق الفضول، يسلط الضوء على الحداثة).</p></li>
+                                </ul>
+                        </p></li>
+                        <li><p>**الطابق الفني/التقني:**
+                                <ul class="list-circle space-y-2 ml-4">
+                                    <li><p>"مونتاج قبل وبعد": إظهار لقطات فيديو خام تتحول إلى فيديو احترافي مصقول. (يسلط الضوء على تأثير المهارة، مؤثر بصرياً).</p></li>
+                                    <li><p>"تحدي التصميم": مهمة تصميم سريعة (مثل إنشاء شعار) من الفكرة إلى المنتج النهائي. (يعرض الإبداع، العملية).</p></li>
+                                    <li><p>"عرض مهارة رقمية": برنامج تعليمي سريع حول خدعة برمجية مفيدة (مثل اختصار في فوتوشوب، اختصار في مونتاج الفيديو). (يوفر قيمة).</p></li>
+                                </ul>
+                        </p></li>
+                        <li><p>**الطابق السكني / اللغة العربية لغير الناطقين بها:**
+                                <ul class="list-circle space-y-2 ml-4">
+                                    <li><p>"عبارة عربية لليوم": متحدث أصلي يعلم عبارة عربية شائعة ومفيدة بطريقة ممتعة. (تفاعلي، تعليمي).</p></li>
+                                    <li><p>"الحياة في سكن تبيان": جولة في المرافق السكنية، تظهر أماكن المعيشة والدراسة المريحة. (يعالج المخاوف العملية، يبني الثقة).</p></li>
+                                </ul>
+                        </p></li>
+                    </ul>
+                    <p class="mb-4 leading-relaxed">استراتيجية الانتشار السريع:</p>
+                    <ul class="list-disc space-y-2 mb-4">
+                        <li><p>**الترويج المتبادل:** مشاركة الريلز عبر جميع المنصات.</p></li>
+                        <li><p>**التسويق بالمؤثرين:** التعاون مع صناع المحتوى السوريين المحليين أو المؤثرين التعليميين.</p></li>
+                        <li><p>**المحتوى الذي ينشئه المستخدمون:** تشجيع الطلاب على مشاركة رحلتهم التعليمية.</p></li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">التسويق التقليدي والتواصل المحلي</h3>
+                    <p class="mb-4 leading-relaxed">الشراكات المحلية: التعاون مع المدارس المحلية، المراكز المجتمعية، ومنظمات الشباب.</p>
+                    <p class="mb-4 leading-relaxed">الجلسات التعريفية: استضافة فعاليات في المجمع لعرض المرافق والبرامج.</p>
+                    <!-- Navigation Buttons for Mobile -->
+                    <div class="flex justify-center mt-8 space-x-4 md:hidden">
+                        <button class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 min-w-[150px]" onclick="showPreviousSection()">
+                            <i class="fas fa-arrow-right ml-2"></i> القسم السابق
+                        </button>
+                        <button class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 min-w-[150px]" onclick="showNextSection()">
+                            القسم التالي <i class="fas fa-arrow-left mr-2"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 6. الإطار التشغيلي وإدارة الموارد -->
+                <section id="operational-framework" class="study-section-content">
+                    <h2 class="text-2xl mb-4 pb-2 border-b border-blue-200">6. الإطار التشغيلي وإدارة الموارد</h2>
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">توظيف وتطوير أعضاء هيئة التدريس والموظفين</h3>
+                    <p class="mb-4 leading-relaxed">التوظيف: جذب مدربين مؤهلين وذوي خبرة، مع إمكانية الاستفادة من الكوادر من الفرع التركي أو السوق السوري المحلي. يجب معالجة مشكلة نقص المعلمين وجودتهم في سوريا.</p>
+                    <p class="mb-4 leading-relaxed">التدريب: توفير تدريب مستمر على أحدث الأساليب التربوية، دمج التكنولوجيا في التعليم، ودعم الطلاب لضمان جودة التعليم.</p>
+
+                    <h3 class="text-xl font-semibold mb-3 text-blue-700">المرافق، التكنولوجيا، والبيئة التعليمية</h3>
+                    <p class="mb-4 leading-relaxed">استغلال الطوابق الأربعة: تحسين استخدام المساحة المتاحة للفصول الدراسية، المختبرات (مثل مختبرات الحاسوب، ورش العمل للحرف اليدوية)، استوديوهات الفن، والوحدات السكنية.</p>
+                    <p class="mb-4 leading-relaxed">البنية التحتية التكنولوجية: ضمان توفر إنترنت موثوق وسريع ، أجهزة حاسوب حديثة، وبرمجيات متخصصة للدورات التقنية.</p>
+                    <p class="mb-4 leading-relaxed">مساحات تعليمية مريحة: خلق بيئة تعليمية جاذبة ومحفزة على التعلم.</p>
+                    <!-- Navigation Buttons for Mobile (Last section only has "Previous") -->
+                    <div class="flex justify-center mt-8 space-x-4 md:hidden">
+                        <button class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 min-w-[150px]" onclick="showPreviousSection()">
+                            <i class="fas fa-arrow-right ml-2"></i> القسم السابق
+                        </button>
+                        <!-- No "Next Section" button for the last section -->
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Table Modal (Hidden by default) -->
+        <div id="table-modal" class="table-modal">
+            <div class="table-modal-content">
+                <button class="close-button" onclick="closeTableModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h3 class="text-2xl mb-4">جدول: تحديات وفرص التعليم السوري</h3>
+                <div class="table-modal-scroll-wrapper">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="py-3 px-4 text-right">التحديات الرئيسية في التعليم السوري</th>
+                                <th class="py-3 px-4 text-right">الفرص الرئيسية لمجمع تبيان التعليمي</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-3 px-4">ارتفاع معدلات التسرب (أكثر من 1.1 مليون)</td>
+                                <td class="py-3 px-4">سوق ضخم وغير مُخدَّم من الشباب الباحثين عن فرص تعليمية أو مهنية.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">تدهور البنية التحتية (7,000 مدرسة متضررة/مدمرة)</td>
+                                <td class="py-3 px-4">إمكانية تقديم بيئة تعليمية حديثة ومجهزة بالكامل.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">نقص الكوادر التدريسية المؤهلة</td>
+                                <td class="py-3 px-4">جذب وتدريب معلمين ذوي كفاءة لتقديم تعليم عالي الجودة.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">الضغوط الاقتصادية تدفع للتسرب</td>
+                                <td class="py-3 px-4">تقديم برامج مهنية تضمن فرص عمل سريعة ودخلاً مستقراً.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">قضايا المناهج والاعتراف بالشهادات</td>
+                                <td class="py-3 px-4">التركيز على جودة المناهج وتقديم شهادات معترف بها محلياً ودولياً.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4"></td>
+                                <td class="py-3 px-4">طلب متزايد على التعليم الخاص المتخصص.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4"></td>
+                                <td class="py-3 px-4">إمكانية دمج التكنولوجيا المتقدمة في التعليم.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4"></td>
+                                <td class="py-3 px-4">حاجة ملحة لمهارات جاهزة لسوق العمل في إعادة الإعمار والقطاعات الناشئة.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4"></td>
+                                <td class="py-3 px-4">وجود دورات مهنية وفكرية شائعة (ترند) في الوقت الحالي.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll to Top Button (Mobile Only) -->
+        <button id="scroll-to-top-btn" aria-label="Scroll to top" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <!-- Scroll to Bottom Button (Mobile Only) -->
+        <button id="scroll-to-bottom-btn" aria-label="Scroll to bottom" onclick="scrollToBottom()">
+            <i class="fas fa-arrow-down"></i>
+        </button>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white p-4 text-center rounded-t-xl mt-6">
+            <p>&copy; 2025 . جميع الحقوق محفوظة.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Array defining the order of study sections
+        const studySectionsOrder = [
+            'market-analysis',
+            'course-offerings',
+            'competitive-landscape',
+            'growth-strategies',
+            'marketing-strategy',
+            'operational-framework'
+        ];
+
+        // JavaScript for managing sections visibility
+        function showStudy() {
+            document.getElementById('la-limit-home-page').classList.add('hidden');
+            document.getElementById('study-main-content').classList.remove('hidden');
+            // Show the hamburger menu button when the study content is active on mobile
+            if (window.innerWidth < 768) { // Use 768px for consistency with Tailwind's 'md' breakpoint
+                document.querySelector(".menu-toggle-button").classList.add("visible-on-study");
+            }
+            // Automatically show the first study section when "Discover Study" is clicked
+            showSection('market-analysis');
+            // Scroll to the very top of the page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showSection(sectionId) {
+            // Close table modal if open
+            closeTableModal();
+
+            // If navigating to a study section, ensure study content is visible
+            if (sectionId !== 'home') {
+                document.getElementById('la-limit-home-page').classList.add('hidden');
+                document.getElementById('study-main-content').classList.remove('hidden');
+                // Ensure hamburger menu is visible on mobile when study content is shown
+                if (window.innerWidth < 768) {
+                    document.querySelector(".menu-toggle-button").classList.add("visible-on-study");
+                }
+                // Close sidebar on mobile after selecting a section
+                if (window.innerWidth < 768) {
+                    document.getElementById('sidebar-nav').classList.remove('open');
+                    document.getElementById('overlay').classList.remove('visible');
+                }
+            } else {
+                // If navigating back to home, hide study content
+                document.getElementById('la-limit-home-page').classList.remove('hidden');
+                document.getElementById('study-main-content').classList.add('hidden');
+                // Hide hamburger menu button when returning to home page
+                if (window.innerWidth < 768) {
+                    document.querySelector(".menu-toggle-button").classList.remove("visible-on-study");
+                }
+            }
+
+            // Hide all study sections
+            document.querySelectorAll('.study-section-content').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Deactivate all nav buttons
+            document.querySelectorAll('.nav-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show the selected section (only if it's a study section)
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection && sectionId !== 'home') { // Only activate if it's a study content section
+                targetSection.classList.add('active');
+            }
+
+            // Activate the corresponding nav button
+            const activeButton = document.querySelector(`.nav-button[onclick="showSection('${sectionId}')"]`);
+            if (activeButton) {
+                activeButton.classList.add('active');
+            }
+
+            // Scroll to the top of the content area or window
+            // Always scroll the window to the top for any section change for better UX
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Function to show the next study section
+        function showNextSection() {
+            const currentActiveSection = document.querySelector('.study-section-content.active');
+            if (currentActiveSection) {
+                const currentSectionId = currentActiveSection.id;
+                const currentIndex = studySectionsOrder.indexOf(currentSectionId);
+
+                // Only proceed if it's not the last section
+                if (currentIndex !== -1 && currentIndex < studySectionsOrder.length - 1) {
+                    const nextSectionId = studySectionsOrder[currentIndex + 1];
+                    showSection(nextSectionId); // This will now scroll to the top of the window
+                }
+            }
+        }
+
+        // Function to show the previous study section
+        function showPreviousSection() {
+            const currentActiveSection = document.querySelector('.study-section-content.active');
+            if (currentActiveSection) {
+                const currentSectionId = currentActiveSection.id;
+                const currentIndex = studySectionsOrder.indexOf(currentSectionId);
+
+                // Only proceed if it's not the first section
+                if (currentIndex > 0) {
+                    const prevSectionId = studySectionsOrder[currentIndex - 1];
+                    showSection(prevSectionId); // This will now scroll to the top of the window
+                }
+            }
+        }
+
+        // Toggle sidebar visibility on mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar-nav');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('visible');
+        }
+
+        // Scroll to Top functionality
+        const scrollToTopBtn = document.getElementById("scroll-to-top-btn");
+        const scrollToBottomBtn = document.getElementById("scroll-to-bottom-btn"); // Get scroll to bottom button
+        const menuToggleButton = document.querySelector(".menu-toggle-button"); // Get the hamburger menu button
+
+        let scrollTimeout;
+        let lastScrollY = 0;
+
+        // Function to show/hide buttons based on scroll movement and page position
+        function handleScrollButtonsVisibility() {
+            if (window.innerWidth < 768) { // Only apply on mobile (consistent breakpoint)
+                const currentScrollY = window.scrollY;
+                const documentHeight = document.documentElement.scrollHeight;
+                const viewportHeight = window.innerHeight;
+                const scrollThreshold = 100; // Pixels to scroll before showing buttons
+
+                // Show/hide scroll-to-top button
+                if (currentScrollY > scrollThreshold) {
+                    scrollToTopBtn.classList.add("visible");
+                } else {
+                    scrollToTopBtn.classList.remove("visible");
+                }
+
+                // Show/hide scroll-to-bottom button
+                // Check if not at the very bottom of the page
+                if (currentScrollY + viewportHeight < documentHeight - scrollThreshold) {
+                    scrollToBottomBtn.classList.add("visible");
+                } else {
+                    scrollToBottomBtn.classList.remove("visible");
+                }
+
+                // Hamburger menu visibility (always visible if study content is active)
+                if (document.getElementById('study-main-content').classList.contains('hidden')) {
+                    menuToggleButton.classList.remove("visible-on-study"); // Hide if not in study view
+                } else {
+                    menuToggleButton.classList.add("visible-on-study"); // Show if in study view
+                }
+
+                // Logic to hide scroll buttons and hamburger menu after no scrolling
+                clearTimeout(scrollTimeout);
+                if (currentScrollY !== lastScrollY) { // Only set timeout if actually scrolling
+                    scrollTimeout = setTimeout(() => {
+                        scrollToTopBtn.classList.remove("visible");
+                        scrollToBottomBtn.classList.remove("visible");
+                        // Only hide hamburger menu if not at the very top AND not already hidden
+                        if (currentScrollY > scrollThreshold && menuToggleButton.classList.contains("visible-on-study")) {
+                            menuToggleButton.classList.add("hidden-on-scroll");
+                        }
+                    }, 1500); // Hide after 1.5 seconds of no scrolling
+                } else { // If not scrolling, ensure hamburger menu is visible if in study mode and not at top
+                    if (currentScrollY > scrollThreshold && document.getElementById('study-main-content').classList.contains('hidden') === false) {
+                        menuToggleButton.classList.remove("hidden-on-scroll");
+                    }
+                }
+                lastScrollY = currentScrollY; // Update last scroll position
+            } else { // On desktop, ensure mobile buttons and menu are hidden
+                scrollToTopBtn.classList.remove("visible");
+                scrollToBottomBtn.classList.remove("visible");
+                menuToggleButton.classList.remove("visible-on-study"); // Ensure it's not visible on desktop
+                menuToggleButton.classList.remove("hidden-on-scroll"); // Ensure this class doesn't interfere
+            }
+        }
+
+        window.addEventListener("scroll", handleScrollButtonsVisibility);
+
+        // Smooth scroll to top when button is clicked
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+        // Smooth scroll to bottom when button is clicked
+        function scrollToBottom() {
+            window.scrollTo({
+                top: document.documentElement.scrollHeight,
+                behavior: "smooth"
+            });
+        }
+
+        // Table Modal Functions
+        function openTableModal(tableId) {
+            const modal = document.getElementById('table-modal');
+            modal.classList.add('visible');
+            // The table content is already in the modal HTML, so no dynamic loading needed here.
+        }
+
+        function closeTableModal() {
+            const modal = document.getElementById('table-modal');
+            modal.classList.remove('visible');
+        }
+
+        // Initialize the home page as active on load
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('home');
+            // Initial check for button visibility on load, especially if already scrolled
+            handleScrollButtonsVisibility();
+        });
+
+        // Re-evaluate button visibility on resize (e.g., rotating phone)
+        window.addEventListener('resize', handleScrollButtonsVisibility);
+    </script>
+</body>
+</html>
